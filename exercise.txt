@@ -1,0 +1,84 @@
+
+Welcome to the TaskRabbit data analysis exercise.  We appreciate your
+time and effort in completing this exercise.  It helps TaskRabbit
+focus on candidates who are the best fit for the Data Analyst role,
+and also helps the candidate get an idea of the type of data we work
+with and the technical skills required to be successful in the role.
+
+For this exercise, a sample data file is provided which contains
+information about "recommendations".  A "recommendation" is the group
+of Taskers from which the Client can choose one to book.
+
+The sample data file is a CSV file of the form:
+
+recommendation_id                          timestamp            tasker_id   position  hourly_rate  num_completed_tasks   hired   category
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009185352   1        38           151                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1006892359   2        40           193                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1012023956   3        28             0                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009733517   4        43           303                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1013579273   5        29            39                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1012043028   6        28             2                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1013470741   7        29             9                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009557645   8        29             8                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1010800768   9        28             0                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009072269  10        35            59                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1008733253  11        40            68                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009198916  12        27            17                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1009856900  13        50           914                   1       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1012314913  14        29             5                   0       Furniture Assembly
+0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c   2017-09-01 00:32:25  1013307670  15        25             0                   0       Furniture Assembly
+
+The columns are as follows:
+
+ recommendation_id    unique identifier for this recommendation, or set of taskers shown
+ timestamp            when this recommendation was shown to the client
+ tasker_id            unique identifier for the Tasker
+ position             the position of the Tasker in the recommendation set, 1 - first, 2 - second, etc.
+ hourly_rate          the hourly rate for the Tasker when they were shown
+ num_completed_tasks  the number of Tasks the Tasker had completed in that category, when they were shown
+ hired                was the Tasker hired or not?  Only 1 tasker out of a set of recommendations can be hired
+ category             the category of work the Client needs help with
+
+
+Please answer the following questions about the data in the CSV sample file:
+
+1. How many recommendation sets are in this data sample?
+
+
+2. Each recommendation set shows from 1 to 15 Taskers, what is:
+     - average number of Taskers shown
+     - median  number of Taskers shown
+
+
+3. How many total unique Taskers are there in this data sample?
+
+
+4. Which Tasker has been shown the most?
+   Which Tasker has been shown the least?
+
+
+5. Which Tasker has been hired the most?
+   Which Tasker has been hired the least?
+
+
+6. If we define the "Tasker conversion rate" as the number of times a
+   Tasker has been hired, out of the number of times the Tasker has
+   been shown, how many Taskers have a conversion rate of 100%
+
+
+7. Would it be possible for all Taskers to have a conversion rate of 100%
+   Please explain your reasoning.
+
+
+8. For each category, what is the average position of the Tasker who is hired?
+
+
+9. For each category, what is the average hourly rate and average number of completed tasks for the Taskers who are hired?
+
+
+10. Based on the previous, how would you approach the question of:
+
+    How can we use market data to suggest hourly rates to Taskers that would
+    maximize their opportunity to be hired?
+
+    Please describe in detail, with code and formulas that support your model.
