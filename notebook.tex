@@ -1,0 +1,1023 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{main}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{import} \PY{n+nn}{sqlalchemy}
+          \PY{k+kn}{from} \PY{n+nn}{sqlalchemy} \PY{k}{import} \PY{n}{create\PYZus{}engine}
+          
+          \PY{k+kn}{import} \PY{n+nn}{warnings}
+          \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Create connection to our database.}
+        \PY{n}{engine} \PY{o}{=} \PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mysql://root:password@localhost/taskrabbit\PYZus{}db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Read in all of the data.}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SELECT * FROM taskrabbit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{engine}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}234}]:} \PY{c+c1}{\PYZsh{} Preview the table.}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}234}]:}                           recommendation\_id          created\_at   tasker\_id  \textbackslash{}
+          0  0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c 2017-09-01 00:32:25  1009185352   
+          1  0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c 2017-09-01 00:32:25  1006892359   
+          2  0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c 2017-09-01 00:32:25  1012023956   
+          3  0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c 2017-09-01 00:32:25  1009733517   
+          4  0-0-70cf97d7-37af-4834-901c-ce3ad4893b8c 2017-09-01 00:32:25  1013579273   
+          
+             position  hourly\_rate  num\_completed\_tasks  hired            category  
+          0         1           38                  151      0  Furniture Assembly  
+          1         2           40                  193      0  Furniture Assembly  
+          2         3           28                    0      0  Furniture Assembly  
+          3         4           43                  303      0  Furniture Assembly  
+          4         5           29                   39      0  Furniture Assembly  
+\end{Verbatim}
+            
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{Question 1: How many recommendation sets are in this data
+sample?}\label{question-1-how-many-recommendation-sets-are-in-this-data-sample}
+
+\subsubsection{Question 2: Each recommendation set shows from 1 to 15
+Taskers, what
+is:}\label{question-2-each-recommendation-set-shows-from-1-to-15-taskers-what-is}
+
+\subparagraph{- average number of Taskers
+shown}\label{average-number-of-taskers-shown}
+
+\subparagraph{- median number of Taskers
+shown}\label{median-number-of-taskers-shown}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}409}]:} \PY{c+c1}{\PYZsh{} Get unique counts of recommendation ids and pass it through the describe function to get quick info on recommendations.}
+          \PY{c+c1}{\PYZsh{} Logic is that the however many times the recommendation id shows up, it corresponds to a tasker\PYZsq{}s position, which will}
+          \PY{c+c1}{\PYZsh{} tell us how many taskers are shown per recommendation.}
+          
+          \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+              \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recommendation\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PYZbs{}
+              \PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PYZbs{}
+              \PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+          \PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}409}]:}        recommendation\_id
+          count        2100.000000
+          mean           14.285714
+          std             2.553531
+          min             1.000000
+          25\%            15.000000
+          50\%            15.000000
+          75\%            15.000000
+          max            15.000000
+\end{Verbatim}
+            
+    For questions 1 and 2, the answers lie within the above dataframe.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  There are 2100 recommendation sets.
+\end{enumerate}
+
+2a) The average number of taskers per recommendation is 14.23 (rounded
+up to 2 decimal places).
+
+2b) The median number of taskers is 15.
+
+    \subsubsection{Question 3: How many total unique Taskers are there in
+this data
+sample?}\label{question-3-how-many-total-unique-taskers-are-there-in-this-data-sample}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}308}]:} \PY{c+c1}{\PYZsh{} Taking value\PYZus{}counts of each tasker id will give us the counts of each unique tasker. }
+          \PY{c+c1}{\PYZsh{} Similar to COUNT(distinct tasker\PYZus{}id).}
+          \PY{c+c1}{\PYZsh{} Calling on \PYZsq{}len\PYZsq{} will give us the length of the column, which is how many unique taskers we have in our sample.}
+          
+          \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tasker\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}308}]:} 830
+\end{Verbatim}
+            
+    \subsubsection{Question 4: Which tasker has been shown the most? Which
+tasker has been shown the
+least?}\label{question-4-which-tasker-has-been-shown-the-most-which-tasker-has-been-shown-the-least}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}237}]:} \PY{c+c1}{\PYZsh{} Set up query}
+          \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{SELECT tasker\PYZus{}id, }
+          \PY{l+s+s1}{count(tasker\PYZus{}id) as }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{times\PYZus{}shown}\PY{l+s+s1}{\PYZsq{}}
+          \PY{l+s+s1}{FROM taskrabbit}
+          \PY{l+s+s1}{GROUP BY tasker\PYZus{}id}
+          \PY{l+s+s1}{ORDER BY count(tasker\PYZus{}id) DESC}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          \PY{c+c1}{\PYZsh{} Read the query as a dataframe.}
+          \PY{n}{taskers} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Take a look at the first 5 entries in the dataframe.}
+          \PY{n}{taskers}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}237}]:}     tasker\_id  times\_shown
+          0  1014508755          608
+          1  1012043028          438
+          2  1014675294          387
+          3  1014629676          311
+          4  1007283421          290
+\end{Verbatim}
+            
+    \paragraph{Tasker shown the most:}\label{tasker-shown-the-most}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}243}]:} \PY{c+c1}{\PYZsh{} Print the first row in the above data frame.}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{taskers}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tasker\_id      1014508755
+times\_shown           608
+Name: 0, dtype: int64
+
+    \end{Verbatim}
+
+    \paragraph{Taskers shown the least:}\label{taskers-shown-the-least}
+
+    There are no taskers that have been shown 0 times, therefore, the
+taskers that have been shown the least are the taskers who have been
+shown at least once.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}312}]:} \PY{c+c1}{\PYZsh{} Grabbing all taskers who have been shown once into a new dataframe.}
+          \PY{n}{taskers\PYZus{}min} \PY{o}{=} \PY{n}{taskers}\PY{p}{[}\PY{p}{(}\PY{n}{taskers}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times\PYZus{}shown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Set a variable equal to taskers\PYZus{}min[\PYZdq{}tasker\PYZus{}id\PYZdq{}] to grab the column and convert it to list to get the IDs only.}
+          \PY{n}{least\PYZus{}taskers} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{taskers\PYZus{}min}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tasker\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(least\PYZus{}taskers)\PYZcb{} taskers who have been shown the least. The tasker IDs are shown below.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{least\PYZus{}taskers}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 68 taskers who have been shown the least. The tasker IDs are shown below.
+
+[1013362004, 1010779242, 1012364558, 1010640007, 1014547884, 1011968845, 1009772528, 1012386513, 1014439502, 1011952623, 1009603880, 1010681878, 1013830691, 1009641175, 1007472083, 1011957940, 1012678504, 1008604368, 1010042971, 1006899551, 1011901532, 1014086818, 1013573125, 1009547227, 1011985968, 1009712638, 1009871933, 1013934937, 1006853970, 1009702351, 1009994950, 1010021990, 1012151299, 1010009736, 1013854788, 1012289475, 1013656032, 1012071620, 1007480912, 1008870833, 1014926743, 1012805440, 1008368716, 1014593279, 1007295623, 1008033678, 1012348656, 1009461190, 1008469117, 1011972750, 1007923586, 1007246122, 1011949117, 1014478773, 1009618500, 1008474216, 1012166729, 1007383273, 1009612428, 1013573988, 1009754999, 1007638825, 1009112003, 1006690425, 1008828652, 1014310300, 1008919567, 1013731883]
+
+    \end{Verbatim}
+
+    \subsubsection{Question 5: Which tasker has been hired the most? Which
+tasker has been hired the
+least?}\label{question-5-which-tasker-has-been-hired-the-most-which-tasker-has-been-hired-the-least}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}305}]:} \PY{c+c1}{\PYZsh{} Grab all of the taskers who have been hired and sort by the number of times they have been hired.}
+          \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{SELECT tasker\PYZus{}id,}
+          \PY{l+s+s1}{count(hired) as }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{times\PYZus{}hired}\PY{l+s+s1}{\PYZsq{}}
+          \PY{l+s+s1}{FROM taskrabbit}
+          \PY{l+s+s1}{WHERE hired = 1}
+          \PY{l+s+s1}{GROUP BY tasker\PYZus{}id}
+          \PY{l+s+s1}{ORDER BY count(hired) DESC}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          \PY{c+c1}{\PYZsh{} Read query as dataframe.}
+          \PY{n}{hired} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Preview dataframe.}
+          \PY{n}{hired}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}305}]:}     tasker\_id  times\_hired
+          0  1012043028           59
+          1  1013131759           39
+          2  1013359522           37
+          3  1013165984           36
+          4  1013794735           35
+\end{Verbatim}
+            
+    \paragraph{Tasker hired the most:}\label{tasker-hired-the-most}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}272}]:} \PY{c+c1}{\PYZsh{} Print first row data}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{hired}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tasker\_id      1012043028
+times\_hired            59
+Name: 0, dtype: int64
+
+    \end{Verbatim}
+
+    \paragraph{Taskers hired the least:}\label{taskers-hired-the-least}
+
+    Since we filtered by those taskers who have been hired, the least amout
+of times a tasker can be hired is 1, therefore, the taskers that have
+been shown the least are the taskers who have been shown at least once.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}316}]:} \PY{c+c1}{\PYZsh{} Grabbing all taskers who have been hired and shown once into a new dataframe.}
+          \PY{n}{hired\PYZus{}least} \PY{o}{=} \PY{n}{hired}\PY{p}{[}\PY{p}{(}\PY{n}{hired}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times\PYZus{}hired}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Set a variable equal to a list of only the tasker\PYZus{}ids that have been hired the least and print it.}
+          \PY{n}{least\PYZus{}hired} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{hired\PYZus{}least}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tasker\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(least\PYZus{}hired)\PYZcb{} taskers who have been hired the least. The tasker IDs are shown below.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{least\PYZus{}hired}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 79 taskers who have been hired the least. The tasker IDs are shown below.
+
+[1011985968, 1008890855, 1008162664, 1013305557, 1012278216, 1013443125, 1008887321, 1009638159, 1009917428, 1008111352, 1009348455, 1009230070, 1014212647, 1009192067, 1008903001, 1014629676, 1013034579, 1012666042, 1009848016, 1012170634, 1009616142, 1010801075, 1007955495, 1008473496, 1012229493, 1009729754, 1013865107, 1009693303, 1007898815, 1014832736, 1014100703, 1008782548, 1008008634, 1010752503, 1013434046, 1008962854, 1015009096, 1006720321, 1014157578, 1007164698, 1009865854, 1009751605, 1008030151, 1007146669, 1008037901, 1009393887, 1010578972, 1009733517, 1007480912, 1012719266, 1009606144, 1008862713, 1013852438, 1007477780, 1009638573, 1010438496, 1008762938, 1008930827, 1009703547, 1015020347, 1008966829, 1010008242, 1013696131, 1011920226, 1010565292, 1007702812, 1014740602, 1008790779, 1009966564, 1013745838, 1013745898, 1013711863, 1009299585, 1013553854, 1011914012, 1013677268, 1014478773, 1008724560, 1014251534]
+
+    \end{Verbatim}
+
+    \subsubsection{Question 6: How many taskers have a conversion rate of
+100\%? Conversion rate is times hired over times
+shown.}\label{question-6-how-many-taskers-have-a-conversion-rate-of-100-conversion-rate-is-times-hired-over-times-shown.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}320}]:} \PY{c+c1}{\PYZsh{} Recall our taskers dataframe:}
+          \PY{n}{taskers}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}320}]:}     tasker\_id  times\_shown
+          0  1014508755          608
+          1  1012043028          438
+          2  1014675294          387
+          3  1014629676          311
+          4  1007283421          290
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}321}]:} \PY{c+c1}{\PYZsh{} Recall our hired dataframe:}
+          \PY{n}{hired}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}321}]:}     tasker\_id  times\_hired
+          0  1012043028           59
+          1  1013131759           39
+          2  1013359522           37
+          3  1013165984           36
+          4  1013794735           35
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}323}]:} \PY{c+c1}{\PYZsh{} Do a Pandas merge (aka an inner join on tasker\PYZus{}id) on \PYZsq{}hired\PYZsq{} and \PYZsq{}taskers\PYZsq{} dataframes.}
+          \PY{n}{conversion} \PY{o}{=} \PY{n}{taskers}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{hired}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tasker\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Calculate conversion rate as new column.}
+          \PY{n}{conversion}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{conversion\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{conversion}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times\PYZus{}hired}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{conversion}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times\PYZus{}shown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Preview our merged dataframe with calculations.}
+          \PY{n}{conversion}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}323}]:}     tasker\_id  times\_shown  times\_hired  conversion\_rate
+          0  1014508755          608            7         0.011513
+          1  1012043028          438           59         0.134703
+          2  1014675294          387            5         0.012920
+          3  1014629676          311            1         0.003215
+          4  1007283421          290            2         0.006897
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{c+c1}{\PYZsh{} 100\PYZpc{} conversion rate means conversion\PYZus{}rate == 1.0}
+          \PY{c+c1}{\PYZsh{} Equivalent to: SELECT \PYZsq{}tasker\PYZus{}id\PYZsq{} FROM conversion WHERE conversion\PYZus{}rate = 1}
+          
+          \PY{n}{conversion\PYZus{}100} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+              \PY{n}{conversion}\PY{p}{[}\PY{n}{conversion}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{conversion\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tasker\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{p}{)}
+\end{Verbatim}
+
+    \paragraph{Taskers with 100\% conversion
+rate:}\label{taskers-with-100-conversion-rate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}360}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(conversion\PYZus{}100)\PYZcb{} taskers with a 100}\PY{l+s+si}{\PYZpc{} c}\PY{l+s+s2}{onversion rate.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{conversion\PYZus{}100}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 6 taskers with a 100\% conversion rate.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}360}]:}       tasker\_id
+          274  1008861741
+          306  1008094420
+          307  1012369686
+          309  1011985968
+          310  1007480912
+          311  1014478773
+\end{Verbatim}
+            
+    \subsubsection{Question 7: Would it be possible for all taskers to have
+a conversion rate of
+100\%?}\label{question-7-would-it-be-possible-for-all-taskers-to-have-a-conversion-rate-of-100}
+
+    In practice, no it would not. When one tasker is chosen over another in
+a recommendation, those who were not selected will have their conversion
+rate permanently lowered. Taskers' conversion rates can approach 100\%
+after not being selected, but they will never reach 100\%.
+
+For example, if a tasker has been selected 9 out of 9 times in the span
+of their account being active, should they be not selected in the 10th
+time they are shown in a recommendation, their conversion rate will drop
+from 100\% to 90\%. They can be selected 90 more times and will still
+have a conversion rate of 99\%. Repeat to infinity and you will still
+never reach 100\%.
+
+This will happen to each tasker that is chosen over another tasker, so
+in practice, it will not be possible for all taskers have a conversion
+of 100\%.
+
+In theory, yes, but only if one tasker is shown per recommendation and
+the tasker is hired every single time.
+
+    \subsubsection{Question 8: For each category, what is the average
+position of the Tasker who is
+hired?}\label{question-8-for-each-category-what-is-the-average-position-of-the-tasker-who-is-hired}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}428}]:} \PY{c+c1}{\PYZsh{} }
+          \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{SELECT category,}
+          \PY{l+s+s1}{avg(position) as }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}position}\PY{l+s+s1}{\PYZsq{}}
+          \PY{l+s+s1}{FROM taskrabbit}
+          \PY{l+s+s1}{WHERE hired = 1}
+          \PY{l+s+s1}{GROUP BY category}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{n}{position} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}
+          
+          \PY{n}{position}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}428}]:}              category  avg\_position
+          0  Furniture Assembly        3.6119
+          1            Mounting        4.5961
+          2         Moving Help        4.1454
+\end{Verbatim}
+            
+    \subsubsection{Question 9: For each category, what is the average hourly
+rate and average number of completed tasks for the Taskers who are
+hired?}\label{question-9-for-each-category-what-is-the-average-hourly-rate-and-average-number-of-completed-tasks-for-the-taskers-who-are-hired}
+
+    \paragraph{NOTE: There are duplicates in the dataset when calculating
+averages via SQL first. Due to the ambiguity of the question, I went
+ahead and did the calculations for averages with duplicates included,
+and not
+included.}\label{note-there-are-duplicates-in-the-dataset-when-calculating-averages-via-sql-first.-due-to-the-ambiguity-of-the-question-i-went-ahead-and-did-the-calculations-for-averages-with-duplicates-included-and-not-included.}
+
+On first glance, we see that we can easily do this in one SQL query, but
+this query averages duplicates in the dataset.
+
+Duplicates in this dataset are taskers who come up twice with the same
+hourly rate and number of tasks completed. This leads us to believe that
+they have been hired, but have not completed the task. Going with this
+approach, we count every instance of when a tasker was hired, and
+disregard whether the tasker completed the task or not.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}404}]:} \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{SELECT category, }
+          \PY{l+s+s1}{avg(hourly\PYZus{}rate) as }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{avg\PYZus{}rate}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{, }
+          \PY{l+s+s1}{avg(num\PYZus{}completed\PYZus{}tasks) as }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{avg\PYZus{}tasks}\PY{l+s+s1}{\PYZdq{}}
+          \PY{l+s+s1}{FROM taskrabbit}
+          \PY{l+s+s1}{WHERE hired = 1}
+          \PY{l+s+s1}{GROUP BY category}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          \PY{n}{category} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}
+          \PY{n}{category}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}404}]:}              category  avg\_rate  avg\_tasks
+          0  Furniture Assembly   38.7010   249.0210
+          1            Mounting   50.1548   284.0961
+          2         Moving Help   63.0123   273.8827
+\end{Verbatim}
+            
+    \paragraph{Averages after dropping
+duplicates:}\label{averages-after-dropping-duplicates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}432}]:} \PY{c+c1}{\PYZsh{} Query for all taskers who have been hired}
+          \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{SELECT category, }
+          \PY{l+s+s1}{hourly\PYZus{}rate,}
+          \PY{l+s+s1}{num\PYZus{}completed\PYZus{}tasks}
+          \PY{l+s+s1}{FROM taskrabbit}
+          \PY{l+s+s1}{WHERE hired = 1}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          \PY{c+c1}{\PYZsh{} Read query and drop the duplicates that occur.}
+          \PY{n}{category\PYZus{}no\PYZus{}duplicates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Group by the category and calculate the mean.}
+          \PY{n}{category\PYZus{}no\PYZus{}duplicates}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}432}]:}                     hourly\_rate  num\_completed\_tasks
+          category                                            
+          Furniture Assembly    39.396761           245.688259
+          Mounting              50.117216           301.941392
+          Moving Help           63.337793           289.254181
+\end{Verbatim}
+            
+    \subsubsection{Question 10: Based on the previous, how would you suggest
+hourly rates to taskers to maximize opportunity to be
+hired?}\label{question-10-based-on-the-previous-how-would-you-suggest-hourly-rates-to-taskers-to-maximize-opportunity-to-be-hired}
+
+    We would want to find the distribution of hourly rates for those taskers
+that have been hired to visually spot any trends.
+
+We begin by looking for any correlations between our values in the
+dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{c+c1}{\PYZsh{} Generate heatmap of related variables.}
+          \PY{n}{corrmat} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corrmat}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Looking at this heatmap, we see that the most related variables in the
+dataset are going to be the number of completed tasks and the hourly
+rate. Let's dive a little deeper in to the dataset and break the
+information down by category:
+
+    \paragraph{Defining a few functions to not repeat
+ourselves:}\label{defining-a-few-functions-to-not-repeat-ourselves}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}386}]:} \PY{k}{def} \PY{n+nf}{df\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{category}\PY{p}{)}\PY{p}{:}
+              
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Returns a dataframe from a given category in the dataset.\PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Query for all taskers\PYZsq{} hourly rates who have been hired by category. }
+              \PY{n}{query} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{    SELECT hourly\PYZus{}rate as }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s1}{\PYZus{}hourly\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}
+          \PY{l+s+s1}{    num\PYZus{}completed\PYZus{}tasks}
+          \PY{l+s+s1}{    FROM taskrabbit}
+          \PY{l+s+s1}{    WHERE hired = 1 and category = }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }
+          \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Some taskers occur more than once. We drop those duplicates.}
+              \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{df}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{category}\PY{p}{)}\PY{p}{:}
+              
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Plots a dataframe by hourly rate vs tasks completed and a histogram for hourly\PYZus{}rate.\PYZsq{}\PYZsq{}\PYZsq{}}
+             
+              \PY{c+c1}{\PYZsh{} Set up scatterplot}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hourly Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tasks Completed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s2}{\PYZus{}hourly\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{num\PYZus{}completed\PYZus{}tasks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Set up histogram}
+              \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s2}{\PYZus{}hourly\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+              
+              
+\end{Verbatim}
+
+    \subsubsection{Plotting each category to see where our distrubution
+lies:}\label{plotting-each-category-to-see-where-our-distrubution-lies}
+
+By looking at the taskers' hourly rates who have been hired and the
+number of tasks they have completed, we can get an idea of where the
+sweet spot is for an hourly rate that will increase their chances of
+being selected. Using the standard deviation, we can determine a range
+of hourly rates that will fall within the range of what we can consider
+a successful tasker.
+
+\paragraph{Moving Help:}\label{moving-help}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}387}]:} \PY{n}{moving\PYZus{}help} \PY{o}{=} \PY{n}{df\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moving Help}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plot\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{moving\PYZus{}help}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moving Help}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}388}]:} \PY{n}{moving\PYZus{}help}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}388}]:}        Moving Help\_hourly\_rate  num\_completed\_tasks
+          count                   299.00               299.00
+          mean                     63.34               289.25
+          std                      30.62               319.58
+          min                      18.00                 0.00
+          25\%                      42.00                50.50
+          50\%                      49.00               160.00
+          75\%                      80.00               368.00
+          max                     190.00              1178.00
+\end{Verbatim}
+            
+    Looking at our scatterplot, we can visually see that the sweet spot in
+the graph for an hourly rate is around \$50. This is across the board
+for the least experienced (0 tasks completed) to the more experienced
+(500+ tasks completed).
+
+This is further confirmed in the histogram that accompanies this
+analysis. The frequency at which a \$50 hourly rate occurs is very
+apparent, so we can choose this hourly rate as a good starting point for
+suggesting a rate for a tasker.
+
+Checking out the distribution for the Moving Help category, we see that
+the median hourly rate is \$49.00 with the mean being \$63.34. Now as
+the number of tasks completed goes up, there is a weak positive
+correlation with the hourly rate as well.
+
+The suggested hourly rate should be a range of values that are typically
+seen for taskers with x amount of tasks under their belt and the
+probability of them being hired should also be displayed.
+
+For example, if a tasker
+
+    \paragraph{Furniture Assembly:}\label{furniture-assembly}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{furn\PYZus{}assemb} \PY{o}{=} \PY{n}{df\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Furniture Assembly}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plot\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{furn\PYZus{}assemb}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Furniture Assembly}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}370}]:} \PY{c+c1}{\PYZsh{} Check our stats for the dataset we pulled}
+          \PY{n}{furn\PYZus{}assemb}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}370}]:}        Furniture Assembly\_hourly\_rate  num\_completed\_tasks
+          count                      247.000000           247.000000
+          mean                        39.396761           245.688259
+          std                         15.797900           264.071937
+          min                         22.000000             0.000000
+          25\%                         30.000000            45.500000
+          50\%                         38.000000           133.000000
+          75\%                         44.000000           423.000000
+          max                        180.000000           988.000000
+\end{Verbatim}
+            
+    \paragraph{Mounting:}\label{mounting}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{mounting} \PY{o}{=} \PY{n}{df\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mounting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plot\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{mounting}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mounting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}371}]:} \PY{n}{mounting}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}371}]:}        Mounting\_hourly\_rate  num\_completed\_tasks
+          count            273.000000           273.000000
+          mean              50.117216           301.941392
+          std               10.268142           297.582818
+          min               26.000000             0.000000
+          25\%               43.000000            69.000000
+          50\%               50.000000           202.000000
+          75\%               55.000000           465.000000
+          max               95.000000          1397.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{k}{def} \PY{n+nf}{df\PYZus{}by\PYZus{}category2}\PY{p}{(}\PY{n}{category}\PY{p}{)}\PY{p}{:}
+              
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Returns a dataframe from a given category in the dataset.\PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Query for all taskers\PYZsq{} hourly rates who have been hired by category. }
+              \PY{n}{query} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{    SELECT hourly\PYZus{}rate as }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s1}{\PYZus{}hourly\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}
+          \PY{l+s+s1}{    num\PYZus{}completed\PYZus{}tasks}
+          \PY{l+s+s1}{    FROM taskrabbit}
+          \PY{l+s+s1}{    WHERE category = }\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}category\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ and hired = 0}
+          \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+              
+              \PY{c+c1}{\PYZsh{} Some taskers occur more than once. We drop those duplicates.}
+              \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{engine}\PY{p}{)}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{df}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}399}]:} \PY{n}{p} \PY{o}{=} \PY{n}{df\PYZus{}by\PYZus{}category2}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moving Help}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plot\PYZus{}by\PYZus{}category}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moving Help}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Appendix (Code that didn't make the
+cut)}\label{appendix-code-that-didnt-make-the-cut}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} Call our plotting function on all categories.}
+         
+         \PY{c+c1}{\PYZsh{} categories = set(data[\PYZdq{}category\PYZdq{}])}
+         \PY{c+c1}{\PYZsh{} for category in categories:}
+         \PY{c+c1}{\PYZsh{}     print(trends\PYZus{}by\PYZus{}category(category))}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{c+c1}{\PYZsh{} Define a function to plot all three categories and to prevent repeating ourselves \PYZhy{} no one likes that.}
+          
+          \PY{c+c1}{\PYZsh{} def trends\PYZus{}by\PYZus{}category(category):}
+              
+          \PY{c+c1}{\PYZsh{}     \PYZsq{}\PYZsq{}\PYZsq{} Returns a plot from a given category in the dataset.}
+          \PY{c+c1}{\PYZsh{}         Plots hourly rate vs tasks completed.\PYZsq{}\PYZsq{}\PYZsq{}}
+              
+          \PY{c+c1}{\PYZsh{}     \PYZsh{} Query for all taskers\PYZsq{} hourly rates who have been hired by category. }
+          \PY{c+c1}{\PYZsh{}     query = f\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{c+c1}{\PYZsh{}     SELECT hourly\PYZus{}rate as \PYZsq{}\PYZob{}category\PYZcb{}\PYZus{}hourly\PYZus{}rate\PYZsq{},}
+          \PY{c+c1}{\PYZsh{}     num\PYZus{}completed\PYZus{}tasks}
+          \PY{c+c1}{\PYZsh{}     FROM taskrabbit}
+          \PY{c+c1}{\PYZsh{}     WHERE hired = 1 and category = \PYZsq{}\PYZob{}category\PYZcb{}\PYZsq{} }
+          \PY{c+c1}{\PYZsh{}     \PYZsq{}\PYZsq{}\PYZsq{}}
+              
+          \PY{c+c1}{\PYZsh{}     \PYZsh{} Some taskers have been appear more than once. We drop the duplicate values.}
+          \PY{c+c1}{\PYZsh{}     df = pd.read\PYZus{}sql\PYZus{}query(query, engine).drop\PYZus{}duplicates()}
+              
+          \PY{c+c1}{\PYZsh{}     \PYZsh{} Save a summary of the values as a dataframe.}
+          \PY{c+c1}{\PYZsh{}     summary = pd.DataFrame(df[f\PYZdq{}\PYZob{}category\PYZcb{}\PYZus{}hourly\PYZus{}rate\PYZdq{}]}
+          \PY{c+c1}{\PYZsh{}                            .describe()}
+          \PY{c+c1}{\PYZsh{}                           )}
+              
+                      
+          \PY{c+c1}{\PYZsh{}     plt.scatter(x=df[f\PYZdq{}\PYZob{}category\PYZcb{}\PYZus{}hourly\PYZus{}rate\PYZdq{}],y=df[\PYZdq{}num\PYZus{}completed\PYZus{}tasks\PYZdq{}], edgecolor=\PYZdq{}black\PYZdq{},zorder=3)}
+          \PY{c+c1}{\PYZsh{}     plt.grid(zorder=0)}
+          \PY{c+c1}{\PYZsh{}     plt.title(f\PYZdq{}\PYZob{}category\PYZcb{}\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}     plt.xlabel(\PYZdq{}Hourly Rate\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}     plt.ylabel(\PYZdq{}Tasks Completed\PYZdq{})    }
+          \PY{c+c1}{\PYZsh{}     plt.show()}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
